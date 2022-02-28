@@ -36,8 +36,8 @@ public class StreamsParitioninigByExample {
     }
 
     public static void main(String[] args) {
-        //partitioningBy_1();
-        partitioningBy_2();
+        partitioningBy_1();
+        //partitioningBy_2();
 
     }
 }

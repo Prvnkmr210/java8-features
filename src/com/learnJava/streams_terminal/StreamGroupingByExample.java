@@ -63,7 +63,7 @@ public class StreamGroupingByExample {
                 .collect(groupingBy(Student::getGradeLevel,
                         maxBy(Comparator.comparing(Student::getGpa))));
 
-       // System.out.println(studentMapOptional);
+       System.out.println(studentMapOptional);
 
         Map<Integer,Student> studentMapOptional1 = StudentDataBase.getAllStudents()
                 .stream()
@@ -97,13 +97,13 @@ public class StreamGroupingByExample {
 
     public static void main(String[] args) {
 
-       // groupStudentsByGender();
+        //groupStudentsByGender();
         //customizedGroupingBy();
         //twoLevelGrouping_1();
-       // twoLevelGrouping_2();
-       // threeArgumentGroupBy();
-        //calculateTopGpa();
-        calculateleastGpa();
+        //twoLevelGrouping_2();
+        //threeArgumentGroupBy();
+        calculateTopGpa();
+        //calculateleastGpa();
 
     }
 }

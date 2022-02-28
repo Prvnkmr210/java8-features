@@ -45,8 +45,7 @@ public class StreamsMinMaxExample {
 
     public static void main(String[] args) {
 
-       // List<Integer> integerList = Arrays.asList(6,7,8,9,10);
-        List<Integer> integerList = new ArrayList<>();
+        List<Integer> integerList = Arrays.asList(6,7,8,9,10);
 
         Optional<Integer> minValueOptional = findMinvalue(integerList);
         System.out.println("minValueOptional : " + minValueOptional);
