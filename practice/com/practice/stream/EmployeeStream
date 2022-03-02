@@ -1,0 +1,80 @@
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+public class EmployeeStream {
+
+	public static void main(String[] args) {
+		List<Employee> employees = new ArrayList<>();
+		employees.add(new Employee("A11", "123", 10000, "C"));
+		employees.add(new Employee("A12", "124", 20000, "A"));
+		employees.add(new Employee("A13", "125", 30000, "B"));
+		employees.add(new Employee("A41", "126", 15000, "C"));
+		employees.add(new Employee("A42", "127", 18000, "A"));
+		employees.add(new Employee("A43", "128", 26000, "A"));
+		
+		Comparator<Employee> deptComp = (e1,e2) -> {
+			return e1.getDepartment().compareTo(e2.getDepartment());
+		};
+		Comparator<Employee> salComp = (e1,e2) -> e1.getSalary() - e2.getSalary();
+		
+		// sort by department & salary
+//		employees.stream().sorted(deptComp.thenComparing(salComp)).forEach(System.out::println);
+		
+		// group by department
+//		Map<String, List<Employee>> map = employees.stream().collect(Collectors.groupingBy(e -> e.getDepartment()));
+//		System.out.println(map);
+		
+		Map<String, Employee> empMap = employees.stream().collect(Collectors.toMap(Employee::getEname, Function.identity()));
+		System.out.println(empMap);
+	}
+
+}
+
+class Employee{
+	private String ename;
+	private String eId;
+	private int salary;
+	private String department;
+
+	public Employee(String ename, String eId, int salary, String department) {
+		this.ename = ename;
+		this.eId = eId;
+		this.salary = salary;
+		this.department = department;
+	}
+	
+	
+
+	public String getEname() {
+		return ename;
+	}
+
+
+
+	public String geteId() {
+		return eId;
+	}
+
+
+
+	public int getSalary() {
+		return salary;
+	}
+
+
+
+	public String getDepartment() {
+		return department;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Employee [ename=" + ename + ", eId=" + eId + ", salary=" + salary + ", department=" + department + "]";
+	}
+}
