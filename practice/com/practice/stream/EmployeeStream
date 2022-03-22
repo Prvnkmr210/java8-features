@@ -30,6 +30,9 @@ public class EmployeeStream {
 		
 		Map<String, Employee> empMap = employees.stream().collect(Collectors.toMap(Employee::getEname, Function.identity()));
 		System.out.println(empMap);
+		
+		Double result = list.stream().collect(Collectors.averagingInt(e -> e.getSalary()));
+		System.out.println(result);
 	}
 
 }
