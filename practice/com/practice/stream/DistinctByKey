@@ -1,0 +1,74 @@
+package com.pk.demo;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+class CityDetail{
+	private Date date;
+	private String cityName;
+	private int minTemp;
+	private int maxTemp;
+	public CityDetail(Date date, String cityName, int minTemp, int maxTemp) {
+		this.date = date;
+		this.cityName = cityName;
+		this.minTemp = minTemp;
+		this.maxTemp = maxTemp;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public String getCityName() {
+		return cityName;
+	}
+	public int getMinTemp() {
+		return minTemp;
+	}
+	public int getMaxTemp() {
+		return maxTemp;
+	}
+	@Override
+	public String toString() {
+		return "CityDetail [date=" + date.toLocaleString() + ", cityName=" + cityName + ", minTemp=" + minTemp + ", maxTemp=" + maxTemp
+				+ "]" + "\n";
+	}
+}
+
+public class TempSorting {
+	
+	static Comparator<CityDetail> tempComp = (c1, c2) -> c2.getMaxTemp() - c1.getMaxTemp();
+	
+	static <T> Predicate<T> distinctByKey(Function<? super T, ?> keyExtractor) {
+	    Set<Object> seen = ConcurrentHashMap.newKeySet();
+	    return t -> seen.add(keyExtractor.apply(t));
+	}
+
+	public static void main(String[] args) throws ParseException {
+		List<CityDetail> cityRecords = new ArrayList<>();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		cityRecords.add(new CityDetail(formatter.parse("2020-01-01"),"Delhi",4,21));
+		cityRecords.add(new CityDetail(formatter.parse("2020-01-01"),"Mumbai",4,23));
+		cityRecords.add(new CityDetail(formatter.parse("2020-01-01"),"Delhi",4,25));
+		cityRecords.add(new CityDetail(formatter.parse("2020-01-01"),"Mumbai",4,20));
+		cityRecords.add(new CityDetail(formatter.parse("2020-01-01"),"Nashik",4,59));
+		cityRecords.add(new CityDetail(formatter.parse("2020-01-01"),"Nashik",4,48));
+		cityRecords.add(new CityDetail(formatter.parse("2020-01-01"),"Pune",4,30));
+		
+		List<CityDetail> result = cityRecords.stream()
+				.filter(distinctByKey(CityDetail::getCityName))
+				.sorted(tempComp)
+				.collect(Collectors.toList());
+		
+		System.out.println(result);
+	}
+
+}
