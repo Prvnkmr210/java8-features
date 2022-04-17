@@ -51,9 +51,23 @@ public class TempSorting {
 	    Set<Object> seen = ConcurrentHashMap.newKeySet();
 	    return t -> seen.add(keyExtractor.apply(t));
 	}
+	
+//	static <T> Predicate<T> distinctByKey(String cityName) {
+//	    Set<Object> seen = ConcurrentHashMap.newKeySet();
+//	    // Predicate is an interface. To return object, anonymous class implementing interface should
+//	    // be created and then object of that returned with method overriding test.
+//	    return new Predicate<T>() {
+//	    	return seen.add(cityName);
+//	    }
+//	}
 
 	public static void main(String[] args) throws ParseException {
 		List<CityDetail> cityRecords = new ArrayList<>();
+		
+//		Predicate<Integer> noGreaterThan5 = new Predicate<Integer>(int x) {
+//			return ;
+//		}
+		
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		cityRecords.add(new CityDetail(formatter.parse("2020-01-01"),"Delhi",4,21));
 		cityRecords.add(new CityDetail(formatter.parse("2020-01-01"),"Mumbai",4,23));
