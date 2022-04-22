@@ -6,6 +6,10 @@ public class CountOccurence {
 		String ip = "abccdefgaa";
 		char c = 'a';
 		System.out.println(countOccurenece(ip,c));
+		
+		Stream<Integer> streams = Stream.of(5, 13, 4, 21, 13, 27, 2, 59, 59, 34);
+		// Find count of occurence of each element in stream
+		System.out.println(streams.collect(Collectors.groupingBy(Function.identity(), Collectors.counting())));
 
 	}
 	
